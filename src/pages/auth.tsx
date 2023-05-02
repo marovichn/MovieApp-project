@@ -18,21 +18,23 @@ const Auth = () => {
           <img className='h-12' src='/images/logo.png' alt='' />
         </nav>
         <div className='flex justify-center'>
-          <div className='bg-black px-16 py-16 self-center mt-2 lg:2-2/5 lg:max-w-md rounded-md w-full'>
+          <div className='bg-black lg:bg-opacity-80 px-16 py-16 self-center mt-2 lg:2-2/5 lg:max-w-md rounded-md w-full'>
             <h2 className='text-white text-4xl mb-8 font-semibold'>
               {variant === "login" ? "Sign In" : "Register"}
             </h2>
             <div className='flex flex-col gap-4'>
-                {variant=== "register" &&<Input
-                id='name'
-                onChange={(ev: {
-                  target: { value: SetStateAction<string> };
-                }) => {
-                  setUsername(ev.target.value);
-                }}
-                label='Username'
-                value={username}
-              ></Input>}
+              {variant === "register" && (
+                <Input
+                  id='name'
+                  onChange={(ev: {
+                    target: { value: SetStateAction<string> };
+                  }) => {
+                    setUsername(ev.target.value);
+                  }}
+                  label='Username'
+                  value={username}
+                ></Input>
+              )}
               <Input
                 id='email'
                 type='email'
@@ -69,9 +71,7 @@ const Auth = () => {
                 className='text-white ml-1 hover:underline cursor-pointer'
                 onClick={toggleVariant}
               >
-                {variant === "login"
-                  ? "Register"
-                  : "Sign In"}
+                {variant === "login" ? "Register" : "Sign In"}
               </span>
             </p>
           </div>
