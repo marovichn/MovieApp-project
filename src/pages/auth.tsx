@@ -1,13 +1,16 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useCallback, useState } from "react";
 import Input from "../../components/Input";
 
 const Auth = () => {
-const [email, setEmail] = useState("");
-const [username, setUsername] = useState("");
-const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
+  const [variant, setVariant] = useState("login");
 
-
+  const toggleVariant = useCallback(() => {
+    setVariant((curr) => (curr === "login" ? "register" : "login"));
+  }, []);
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover ">
       <div className='bg-black w-full h-full lg:bg-opacity-60'>
@@ -15,10 +18,12 @@ const [password, setPassword] = useState("");
           <img className='h-12' src='/images/logo.png' alt='' />
         </nav>
         <div className='flex justify-center'>
-          <div className='bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:2-2/5 lg:max-w-md rounded-md w-full'>
-            <h2 className='text-white text-4xl mb-8 font-semibold'>Sign in</h2>
+          <div className='bg-black px-16 py-16 self-center mt-2 lg:2-2/5 lg:max-w-md rounded-md w-full'>
+            <h2 className='text-white text-4xl mb-8 font-semibold'>
+              {variant === "login" ? "Sign In" : "Register"}
+            </h2>
             <div className='flex flex-col gap-4'>
-              <Input
+                {variant=== "register" &&<Input
                 id='name'
                 onChange={(ev: {
                   target: { value: SetStateAction<string> };
@@ -27,7 +32,7 @@ const [password, setPassword] = useState("");
                 }}
                 label='Username'
                 value={username}
-              ></Input>
+              ></Input>}
               <Input
                 id='email'
                 type='email'
@@ -51,12 +56,23 @@ const [password, setPassword] = useState("");
                 value={password}
               ></Input>
             </div>
-            <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition">Login</button>
-            <p className="text-neutral-500 mt-12 text-center">First time using Netflix? 
-            <br />
-            <span className="text-white ml-1 hover:underline cursor-pointer">
-                Create An Account
-            </span>
+            <button className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'>
+              {variant === "login" ? "Sign In" : "Register"}
+            </button>
+
+            <p className='text-neutral-500 mt-12 text-center'>
+              {variant === "login"
+                ? "First time using Netflix?"
+                : "Already have an account?"}
+              <br />
+              <span
+                className='text-white ml-1 hover:underline cursor-pointer'
+                onClick={toggleVariant}
+              >
+                {variant === "login"
+                  ? "Register"
+                  : "Sign In"}
+              </span>
             </p>
           </div>
         </div>
