@@ -52,9 +52,10 @@ const [password, setPassword] = useState("");
               ></Input>
             </div>
             <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition">Login</button>
-            <p className="text-neutral-500 mt-12">First time using Netflix?
-            <span className="">
-                Sign Up
+            <p className="text-neutral-500 mt-12 text-center">First time using Netflix? 
+            <br />
+            <span className="text-white ml-1 hover:underline cursor-pointer">
+                Create An Account
             </span>
             </p>
           </div>
