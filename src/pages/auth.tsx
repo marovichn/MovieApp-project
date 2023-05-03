@@ -4,8 +4,11 @@ import Input from "../../components/Input";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+
 const Auth = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +18,7 @@ const Auth = () => {
   const toggleVariant = useCallback(() => {
     setVariant((curr) => (curr === "login" ? "register" : "login"));
   }, []);
-  
+
   const login = useCallback(async () => {
     try {
       await signIn("credentials", {
@@ -25,12 +28,11 @@ const Auth = () => {
         callbackUrl: "/",
       });
 
-      router.push("/")
+      router.push("/");
     } catch (err) {
       console.log(err);
     }
   }, [email, password, router]);
-
 
   const register = useCallback(async () => {
     try {
@@ -46,7 +48,6 @@ const Auth = () => {
     }
   }, [email, name, password, login]);
 
-  
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover ">
       <div className='bg-black w-full h-full lg:bg-opacity-60'>
@@ -93,15 +94,49 @@ const Auth = () => {
                 label='Password'
                 value={password}
               ></Input>
+              <button
+                onClick={variant === "login" ? login : register}
+                className='bg-red-600 py-3 text-white rounded-md w-full mt-6 hover:bg-red-700 transition'
+              >
+                {variant === "login" ? "Sign In" : "Register"}
+              </button>
+              <div className='flex items-center mt-8 flex-row gap-4 justify-center'>
+                <div
+                  className='
+              w-10
+              h-10
+              bg-white
+              rounded-full
+              flex
+              items-center
+              justify-center
+              cursor-pointer
+              hover:opacity-80
+              transition
+              '
+                >
+                  <FcGoogle size={30}></FcGoogle>
+                </div>
+                <div
+                  className='
+              w-10
+              h-10
+              bg-white
+              rounded-full
+              flex
+              items-center
+              justify-center
+              cursor-pointer
+              hover:opacity-80
+              transition
+              '
+                >
+                  <FaGithub size={30}></FaGithub>
+                </div>
+              </div>
             </div>
-            <button
-              onClick={variant === "login" ? login : register}
-              className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'
-            >
-              {variant === "login" ? "Sign In" : "Register"}
-            </button>
 
-            <p className='text-neutral-500 mt-12 text-center'>
+            <p className='text-neutral-500 mt-5 text-center'>
               {variant === "login"
                 ? "First time using Netflix?"
                 : "Already have an account?"}
