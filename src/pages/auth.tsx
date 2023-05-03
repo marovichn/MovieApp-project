@@ -102,6 +102,11 @@ const Auth = () => {
               </button>
               <div className='flex items-center mt-8 flex-row gap-4 justify-center'>
                 <div
+                  onClick={() =>
+                    signIn("google", {
+                      callbackUrl: "/",
+                    })
+                  }
                   className='
               w-10
               h-10
@@ -118,6 +123,11 @@ const Auth = () => {
                   <FcGoogle size={30}></FcGoogle>
                 </div>
                 <div
+                  onClick={() =>
+                    signIn("github", {
+                      callbackUrl: "/",
+                    })
+                  }
                   className='
               w-10
               h-10
