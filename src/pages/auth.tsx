@@ -9,9 +9,17 @@ const Auth = () => {
 
   const [variant, setVariant] = useState("login");
 
-  const register =useCallback(async ()=>{
-try{}catch(err){}
-  })
+  const register = useCallback(async () => {
+    try {
+      await axios.post("/api/register", {
+        email,
+        name,
+        password,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   const toggleVariant = useCallback(() => {
     setVariant((curr) => (curr === "login" ? "register" : "login"));
