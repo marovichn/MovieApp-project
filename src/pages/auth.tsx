@@ -4,10 +4,14 @@ import Input from "../../components/Input";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState("login");
+  
+  const toggleVariant = useCallback(() => {
+    setVariant((curr) => (curr === "login" ? "register" : "login"));
+  }, []);
 
   const register = useCallback(async () => {
     try {
@@ -19,11 +23,9 @@ const Auth = () => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [email,name,password]);
 
-  const toggleVariant = useCallback(() => {
-    setVariant((curr) => (curr === "login" ? "register" : "login"));
-  }, []);
+  
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover ">
       <div className='bg-black w-full h-full lg:bg-opacity-60'>
@@ -42,10 +44,10 @@ const Auth = () => {
                   onChange={(ev: {
                     target: { value: SetStateAction<string> };
                   }) => {
-                    setUsername(ev.target.value);
+                    setName(ev.target.value);
                   }}
-                  label='Username'
-                  value={username}
+                  label='name'
+                  value={name}
                 ></Input>
               )}
               <Input
@@ -71,7 +73,7 @@ const Auth = () => {
                 value={password}
               ></Input>
             </div>
-            <button className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'>
+            <button onClick={register} className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'>
               {variant === "login" ? "Sign In" : "Register"}
             </button>
 
