@@ -7,6 +7,7 @@ import { compare } from "bcrypt";
 import prismadb from "../../../../lib/prismadb";
 
 export const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(prismadb),
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -61,7 +62,7 @@ export const authOptions: AuthOptions = {
     signIn: "/auth",
   },
   debug: process.env.NODE_ENV === "development",
-  adapter: PrismaAdapter(prismadb),
+  
   session: { strategy: "jwt" },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
