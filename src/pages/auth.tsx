@@ -8,7 +8,6 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 const Auth = () => {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -24,15 +23,13 @@ const Auth = () => {
       await signIn("credentials", {
         email,
         password,
-        redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       });
 
-      router.push("/");
     } catch (err) {
       console.log(err);
     }
-  }, [email, password, router]);
+  }, [email, password]);
 
   const register = useCallback(async () => {
     try {
@@ -104,7 +101,7 @@ const Auth = () => {
                 <div
                   onClick={() =>
                     signIn("google", {
-                      callbackUrl: "/",
+                      callbackUrl: "/profiles",
                     })
                   }
                   className='
@@ -125,7 +122,7 @@ const Auth = () => {
                 <div
                   onClick={() =>
                     signIn("github", {
-                      callbackUrl: "/",
+                      callbackUrl: "/profiles",
                     })
                   }
                   className='
