@@ -5,10 +5,17 @@ import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import AccountMenu from "./AccountMenu";
 
 const Navbar = () => {
-  const [visible, setVisible] = useState(false);
+  const [visibleBrowseMenu, setVisibleBrowseMenu] = useState(false);
+  const [visibleAccountMenu, setVisibleAccountMenu] = useState(false);
 
   const toggleMenu = useCallback(() => {
-    setVisible((current) => {
+    setVisibleBrowseMenu((current) => {
+      return !current;
+    });
+  }, []);
+
+  const toggleAccountMenu = useCallback(() => {
+    setVisibleAccountMenu((current) => {
       return !current;
     });
   }, []);
@@ -43,7 +50,7 @@ const Navbar = () => {
         >
           <p className='text-white text-sm'>Browse</p>
           <BsChevronDown className='text-white mt-1 transition' />
-          <MobileMenu visible={visible}></MobileMenu>
+          <MobileMenu visible={visibleBrowseMenu}></MobileMenu>
         </div>
         <div className='flex flex-row ml-auto gap-7 items-center'>
           <div className='text-gray-200 hover:text-grey-300 cursor-pointer'>
@@ -52,12 +59,12 @@ const Navbar = () => {
           <div className='text-gray-200 hover:text-grey-300 cursor-pointer'>
             <BsBell className='text-white text-md' />
           </div>
-          <div className='flex flex-row items-center gap-2 cursor pointer relative'>
+          <div onClick={toggleAccountMenu}className='flex flex-row items-center gap-2 cursor pointer relative'>
             <div className='w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden cursor-pointer'>
               <img src='/images/default-green.png' alt='' />
             </div>
             <BsChevronDown className='text-white transition' />
-            <AccountMenu visible/>
+            <AccountMenu visible={visibleAccountMenu}/>
           </div>
         </div>
       </div>
