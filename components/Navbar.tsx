@@ -1,4 +1,6 @@
+import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
+import { BsChevronDown } from "react-icons/bs";
 
 const Navbar = () => {
   return (
@@ -18,7 +20,16 @@ const Navbar = () => {
         <img className='h-5 lg:h-8' src='/images/logo.png' alt='netflix logo' />
 
         <div className='flex-row ml-8 gap-7 hidden lg:flex'>
-            <NavbarItem></NavbarItem>
+          <NavbarItem label='Home'></NavbarItem>
+          <NavbarItem label='Series'></NavbarItem>
+          <NavbarItem label='New & Popular'></NavbarItem>
+          <NavbarItem label='My List'></NavbarItem>
+          <NavbarItem label='Browse By Languages'></NavbarItem>
+        </div>
+        <div className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative">
+            <p className="text-white text-sm">Browse</p>
+            <BsChevronDown className="text-white mt-1 transition"/>
+            <MobileMenu></MobileMenu>
         </div>
       </div>
     </nav>
