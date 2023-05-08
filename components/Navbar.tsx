@@ -1,12 +1,33 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import AccountMenu from "./AccountMenu";
 
+
+const TOP_OFFSET=66;
+
+
 const Navbar = () => {
   const [visibleBrowseMenu, setVisibleBrowseMenu] = useState(false);
   const [visibleAccountMenu, setVisibleAccountMenu] = useState(false);
+  const [showBackground, setShowBackground] = useState(false);
+
+  useEffect(()=>{
+    const handleScroll=()=>{
+      if(window.scrollY >= TOP_OFFSET){
+        setShowBackground(true);
+      }else{
+        setShowBackground(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return ()=>{
+      window.removeEventListener("scroll", handleScroll);
+    }
+  },[])
 
   const toggleMenu = useCallback(() => {
     setVisibleBrowseMenu((current) => {
@@ -21,18 +42,18 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className='w-full fixed z-40'>
+    <nav className="w-full fixed z-40">
       <div
-        className='px-4 md:px-16
+        className={`px-4 md:px-16
     py-6
     flex
     flex-row
     items-center
     transition
     duration-500
-    bg-zinc-900
-    bg-opacity-90
-    '
+    ${showBackground ? "bg-zinc-900 bg-opacity-90" : "bg-opacity-0"
+    }
+    `}
       >
         <img className='h-5 lg:h-8' src='/images/logo.png' alt='netflix logo' />
 
@@ -49,7 +70,13 @@ const Navbar = () => {
           className='lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative'
         >
           <p className='text-white text-sm'>Browse</p>
-          <BsChevronDown className='text-white mt-1 transition' />
+          <BsChevronDown
+            className={`text-white mt-1 transition ${
+              visibleBrowseMenu
+                ? "rotate-180"
+                : "rotate-0"
+            }`}
+          />
           <MobileMenu visible={visibleBrowseMenu}></MobileMenu>
         </div>
         <div className='flex flex-row ml-auto gap-7 items-center'>
@@ -59,12 +86,21 @@ const Navbar = () => {
           <div className='text-gray-200 hover:text-grey-300 cursor-pointer'>
             <BsBell className='text-white text-md' />
           </div>
-          <div onClick={toggleAccountMenu}className='flex flex-row items-center gap-2 cursor pointer relative'>
+          <div
+            onClick={toggleAccountMenu}
+            className='flex flex-row items-center gap-2 cursor pointer relative'
+          >
             <div className='w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden cursor-pointer'>
               <img src='/images/default-green.png' alt='' />
             </div>
-            <BsChevronDown className='text-white transition' />
-            <AccountMenu visible={visibleAccountMenu}/>
+            <BsChevronDown
+              className={`text-white transition ${
+                visibleAccountMenu
+                  ? "rotate-180 transition"
+                  : "rotate-0 transition"
+              }`}
+            />
+            <AccountMenu visible={visibleAccountMenu} />
           </div>
         </div>
       </div>
