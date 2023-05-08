@@ -26,6 +26,7 @@ const { data : user } = useCurrentUser();
   return (
     <>
       <Navbar></Navbar>
+      <Billboard />
     </>
   )
 }
