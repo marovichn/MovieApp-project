@@ -1,19 +1,18 @@
-import useSWR from "swr";
+import useSwr from "swr";
 import fetcher from "../lib/fetcher";
-import serverAuth from "../lib/serverAuth";
 
-const useFavorites =()=>{
-const {data,error,isLoading, mutate} = useSWR("/api/favorites", fetcher,{
+const useMovies = () => {
+  const { data, error, isLoading, mutate } = useSwr("/api/favorites", fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
-});
-
-return {
+  });
+  return {
     data,
     error,
     isLoading,
-    mutate
-}
-}
-export default useFavorites;
+    mutate,
+  };
+};
+
+export default useMovies;
