@@ -3,7 +3,7 @@ import prismadb from "../../../lib/prismadb";
 import { without } from "lodash";
 import serverAuth from "../../../lib/serverAuth";
 
-export default async function postHandler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
