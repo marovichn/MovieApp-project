@@ -24,9 +24,13 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     let response;
 
     if (isFavorite) {
-      response = await axios.delete("/api/favorite", { data: { movieId } });
+      if (movieId != null) {
+        response = await axios.delete("/api/favorite", { data: { movieId } });
+      }
     } else {
-      response = await axios.post("/api/favorite", { movieId });
+      if (movieId != null) {
+        response = await axios.post("/api/favorite", { movieId });
+      }
     }
 
     const updatedFavoriteIds = response?.data?.favoriteIds;
@@ -35,11 +39,14 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
       ...currentUser,
       favoriteIds: updatedFavoriteIds,
     });
-    
     mutateFavorites();
   }, [movieId, isFavorite, currentUser, mutate, mutateFavorites]);
 
-  const Icon = isFavorite ? <AiOutlineCheck className='text-white group-hover/item:text-neutral-300 w-4 lg:w-6' /> : <AiOutlinePlus className='text-white group-hover/item:text-neutral-300 w-4 lg:w-6' />;
+  const Icon = isFavorite ? (
+    <AiOutlineCheck className='text-white group-hover/item:text-neutral-300 w-4 lg:w-6' />
+  ) : (
+    <AiOutlinePlus className='text-white group-hover/item:text-neutral-300 w-4 lg:w-6' />
+  );
 
   return (
     <div
