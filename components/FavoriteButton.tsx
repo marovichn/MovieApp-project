@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCsrfToken } from "next-auth/react";
 import React, { useCallback, useMemo } from "react";
 import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 
@@ -24,13 +25,9 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     let response;
 
     if (isFavorite) {
-      if (movieId != null) {
-        response = await axios.delete("/api/favorite", { data: { movieId } });
-      }
+      response = await axios.post("/api/unfavorite", { movieId: movieId });
     } else {
-      if (movieId != null) {
-        response = await axios.post("/api/favorite", { movieId });
-      }
+      response = await axios.post("/api/favorite", { movieId : movieId });
     }
 
     const updatedFavoriteIds = response?.data?.favoriteIds;
@@ -42,18 +39,14 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     mutateFavorites();
   }, [movieId, isFavorite, currentUser, mutate, mutateFavorites]);
 
-  const Icon = isFavorite ? (
-    <AiOutlineCheck className='text-white group-hover/item:text-neutral-300 w-4 lg:w-6' />
-  ) : (
-    <AiOutlinePlus className='text-white group-hover/item:text-neutral-300 w-4 lg:w-6' />
-  );
+  const Icon = isFavorite ? AiOutlineCheck : AiOutlinePlus;
 
   return (
     <div
       onClick={toggleFavorites}
       className='cursor-pointer group/item w-6 h-6 lg:w-10 lg:h-10 border-white border-2 rounded-full flex justify-center items-center transition hover:border-neutral-300'
     >
-      {Icon}
+      <Icon className='text-white group-hover/item:text-neutral-300 w-4 lg:w-6' />
     </div>
   );
 };
