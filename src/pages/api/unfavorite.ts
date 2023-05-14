@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prismadb from "../../../lib/prismadb";
 
-import { getSession } from "next-auth/react";
 import { without } from "lodash";
 import serverAuth from "../../../lib/serverAuth";
 
