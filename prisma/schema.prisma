@@ -68,3 +68,21 @@ model Movie {
   genre String
   duration String
 }
+
+model Video {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  videoUrl String
+  duration String
+  seriesId String @db.ObjectId
+  series Series @relation(fields: [seriesId], references: [id])
+}
+
+model Series {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String
+  thumbnailUrl String
+  genre String
+  videos Video[]
+}

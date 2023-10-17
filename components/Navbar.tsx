@@ -55,7 +55,7 @@ const Navbar = () => {
     }
     `}
       >
-        <img className='h-5 lg:h-8' src='/images/logo.png' alt='netflix logo' />
+        <div className='h-5 lg:h-8 text-red-600 font-extrabold text-2xl -mt-4 lg:-mt-1'>MiFlix</div>
 
         <div className='flex-row ml-8 gap-7 hidden lg:flex'>
           <NavbarItem label='Home'></NavbarItem>

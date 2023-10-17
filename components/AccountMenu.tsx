@@ -1,4 +1,6 @@
-import { signOut } from "next-auth/react";
+"use client"
+
+import { signOut, useSession } from "next-auth/react";
 import React from "react";
 
 interface AccountMenuProps {
@@ -6,6 +8,9 @@ interface AccountMenuProps {
 }
 
 const AccountMenu: React.FC<AccountMenuProps>=({visible})=>{
+  const session = useSession();
+  const sessionName = session.data?.user?.name;
+
     if(!visible){
         return null;
     }
@@ -18,14 +23,14 @@ const AccountMenu: React.FC<AccountMenuProps>=({visible})=>{
               src='/images/default-green.png'
               alt=''
             />
-            <p className='text-white text-sm group-hover/item:underline'>
-              Username
+            <p className='text-white text-sm'>
+              {sessionName}
             </p>
           </div>
         </div><hr className='bg-gray-600 border-0 h-px my-4' />
         <div
           onClick={() => signOut()}
-          className='px-3 text-center text-white text-sm hover:underline'
+          className='px-3 text-center text-white text-sm hover:underline cursor-pointer'
         >
           Sign out of Netflix
         </div>
