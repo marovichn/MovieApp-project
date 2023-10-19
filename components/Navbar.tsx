@@ -63,7 +63,6 @@ const Navbar = () => {
           <NavbarItem label='Movies'></NavbarItem>
           <NavbarItem label='New & Popular'></NavbarItem>
           <NavbarItem label='My List'></NavbarItem>
-          <NavbarItem label='Browse By Languages'></NavbarItem>
         </div>
         <div
           onClick={toggleMenu}
@@ -80,9 +79,6 @@ const Navbar = () => {
           <MobileMenu visible={visibleBrowseMenu}></MobileMenu>
         </div>
         <div className='flex flex-row ml-auto gap-7 items-center'>
-          <div className='text-gray-200 hover:text-grey-300 cursor-pointer'>
-            <BsSearch className='text-white text-md' />
-          </div>
           <div className='text-gray-200 hover:text-grey-300 cursor-pointer'>
             <BsBell className='text-white text-md' />
           </div>
