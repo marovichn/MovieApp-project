@@ -3,31 +3,30 @@ import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import AccountMenu from "./AccountMenu";
+import Link from "next/link";
 
-
-const TOP_OFFSET=66;
-
+const TOP_OFFSET = 66;
 
 const Navbar = () => {
   const [visibleBrowseMenu, setVisibleBrowseMenu] = useState(false);
   const [visibleAccountMenu, setVisibleAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
 
-  useEffect(()=>{
-    const handleScroll=()=>{
-      if(window.scrollY >= TOP_OFFSET){
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= TOP_OFFSET) {
         setShowBackground(true);
-      }else{
+      } else {
         setShowBackground(false);
       }
-    }
+    };
 
     window.addEventListener("scroll", handleScroll);
 
-    return ()=>{
+    return () => {
       window.removeEventListener("scroll", handleScroll);
-    }
-  },[])
+    };
+  }, []);
 
   const toggleMenu = useCallback(() => {
     setVisibleBrowseMenu((current) => {
@@ -42,7 +41,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="w-full fixed z-40">
+    <nav className='w-full fixed z-40'>
       <div
         className={`px-4 md:px-16
     py-6
@@ -51,18 +50,19 @@ const Navbar = () => {
     items-center
     transition
     duration-500
-    ${showBackground ? "bg-zinc-900 bg-opacity-90" : "bg-opacity-0"
-    }
+    ${showBackground ? "bg-zinc-900 bg-opacity-90" : "bg-opacity-0"}
     `}
       >
-        <div className='h-5 lg:h-8 text-red-600 font-extrabold text-2xl -mt-4 lg:-mt-1'>MiFlix</div>
+        <div className='h-5 lg:h-8 text-red-600 font-extrabold text-2xl -mt-4 lg:-mt-1'>
+          <Link href='/'>MiFlix</Link>
+        </div>
 
         <div className='flex-row ml-8 gap-7 hidden lg:flex'>
-          <NavbarItem label='Home'></NavbarItem>
-          <NavbarItem label='Series'></NavbarItem>
-          <NavbarItem label='Movies'></NavbarItem>
-          <NavbarItem label='New & Popular'></NavbarItem>
-          <NavbarItem label='My List'></NavbarItem>
+          <NavbarItem href='/' label='Home'></NavbarItem>
+          <NavbarItem href='/series' label='Series'></NavbarItem>
+          <NavbarItem href='/movies' label='Movies'></NavbarItem>
+          <NavbarItem href='/trending' label='New & Popular'></NavbarItem>
+          <NavbarItem href='/favorites' label='My List'></NavbarItem>
         </div>
         <div
           onClick={toggleMenu}
@@ -71,9 +71,7 @@ const Navbar = () => {
           <p className='text-white text-sm'>Browse</p>
           <BsChevronDown
             className={`text-white mt-1 transition ${
-              visibleBrowseMenu
-                ? "rotate-180"
-                : "rotate-0"
+              visibleBrowseMenu ? "rotate-180" : "rotate-0"
             }`}
           />
           <MobileMenu visible={visibleBrowseMenu}></MobileMenu>
