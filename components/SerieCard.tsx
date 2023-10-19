@@ -3,12 +3,12 @@ import { BsFillPlayFill } from "react-icons/bs";
 import FavoriteButton from "./FavoriteButton";
 import { useRouter } from "next/router";
 
-interface MovieCardProps {
+interface SerieCardProps {
   data: Record<string, any>;
   key: string;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+const SerieCard: React.FC<SerieCardProps> = ({ data }) => {
 const router = useRouter();
 
   return (
@@ -70,7 +70,7 @@ const router = useRouter();
           >
             <div
               onClick={() => {
-                router.push(`/watch/${data?.id}`);
+                router.push(`/series/watch/${data?.id}`);
               }}
               className='cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center
                items-center transition first-letter:hover:bg-neutral-300 '
@@ -100,4 +100,4 @@ const router = useRouter();
     </div>
   );
 };
-export default MovieCard;
+export default SerieCard;
