@@ -3,13 +3,14 @@ import { BsFillPlayFill } from "react-icons/bs";
 import FavoriteButton from "./FavoriteButton";
 import { useRouter } from "next/router";
 
-interface SerieCardProps {
+interface EpisodeCardProps {
   data: Record<string, any>;
   key: string;
+  serieId: string;
 }
 
-const SerieCard: React.FC<SerieCardProps> = ({ data }) => {
-const router = useRouter();
+const EpisodeCard: React.FC<EpisodeCardProps> = ({ data, serieId }) => {
+  const router = useRouter();
 
   return (
     <div className='group bg-zinc-900 col-span relative h-[12vw]'>
@@ -70,7 +71,7 @@ const router = useRouter();
           >
             <div
               onClick={() => {
-                router.push(`/series/${data?.id}`);
+                router.push(`/series/${serieId}/episode/${data?.id}`);
               }}
               className='cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center
                items-center transition first-letter:hover:bg-neutral-300 '
@@ -84,9 +85,11 @@ const router = useRouter();
             New <span className='text-white'>2023</span>
           </p>
 
-          {data.title && <div className='flex flex-row gap-2 items-center'>
-            <p className='text-white text-[10px] lg:text-sm'>{data.title}</p>
-          </div>}
+          {data.title && (
+            <div className='flex flex-row gap-2 items-center'>
+              <p className='text-white text-[10px] lg:text-sm'>{data.title}</p>
+            </div>
+          )}
 
           <div className='flex flex-row mt-4 gap-2 items-center'>
             <p className='text-white text-[10px] lg:text-sm'>{data.duration}</p>
@@ -100,4 +103,4 @@ const router = useRouter();
     </div>
   );
 };
-export default SerieCard;
+export default EpisodeCard;
