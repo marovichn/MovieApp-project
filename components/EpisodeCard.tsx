@@ -32,8 +32,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ data, serieId }) => {
         alt='Thumbnail'
       />
       <div
-        className='opacity-0 absolute top-0 transition duration-200 z-10 invisible
-        sm:visible
+        className='opacity-0 absolute top-0 transition duration-200 z-10 
         delay-300
         w-full
         scale-0
