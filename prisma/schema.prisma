@@ -74,7 +74,7 @@ model Video {
   title String
   videoUrl String
   duration String
-  thumbnailUrl String
+  thumbnailUrl String?
   seriesId String @db.ObjectId
   series Series @relation(fields: [seriesId], references: [id])
 }
