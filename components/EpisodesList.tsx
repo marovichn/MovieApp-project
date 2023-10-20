@@ -7,10 +7,9 @@ import EpisodeCard from "./EpisodeCard";
 interface EpisodesListProps {
   data: Record<string, any>[];
   title: string;
-  serieId: string
 }
 
-const EpisodesList: React.FC<EpisodesListProps> = ({ data, title, serieId }) => {
+const EpisodesList: React.FC<EpisodesListProps> = ({ data, title}) => {
   if (isEmpty(data)) {
     return null;
   }
@@ -23,7 +22,7 @@ const EpisodesList: React.FC<EpisodesListProps> = ({ data, title, serieId }) => 
         </p>
         <div className='grid grid-cols-4 gap-2'>
           {data.map((movie) => {
-            return <EpisodeCard serieId={serieId} key={movie?.id} data={movie}/>
+            return <EpisodeCard serieId={movie?.seriesId} key={movie?.id} data={movie}/>
           })}
         </div>
       </div>

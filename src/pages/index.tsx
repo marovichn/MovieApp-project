@@ -5,6 +5,8 @@ import Billboard from "../../components/Billboard";
 import MovieList from "../../components/MovieList";
 import useMovieList from "../../hooks/useMovieList";
 import useFavorites from "../../hooks/useFavorites";
+import SeriesList from "../../components/SeriesList";
+import useSerieList from "../../hooks/useSerieList";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
@@ -26,6 +28,7 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function Home() {
   const { data: movies = [] } = useMovieList();
   const { data: favorites = [] } = useFavorites();
+  const { data: series = [] } = useSerieList();
 
   return (
     <>
@@ -34,6 +37,7 @@ export default function Home() {
         <Billboard />
         <div className='pb-40'>
           <MovieList data={movies} title='Trending Now' />
+          <SeriesList data={series} title="Trending Series"></SeriesList>
           <MovieList data={favorites} title='My List' />
         </div>
       </SessionProvider>

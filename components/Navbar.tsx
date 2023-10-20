@@ -77,9 +77,7 @@ const Navbar = () => {
           <MobileMenu visible={visibleBrowseMenu}></MobileMenu>
         </div>
         <div className='flex flex-row ml-auto gap-7 items-center'>
-          <div className='text-gray-200 hover:text-grey-300 cursor-pointer'>
-            <BsBell className='text-white text-md' />
-          </div>
+          
           <div
             onClick={toggleAccountMenu}
             className='flex flex-row items-center gap-2 cursor pointer relative'

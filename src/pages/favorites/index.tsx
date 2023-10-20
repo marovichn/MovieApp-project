@@ -4,6 +4,8 @@ import Navbar from "../../../components/Navbar";
 import MovieList from "../../../components/MovieList";
 
 import useFavorites from "../../../hooks/useFavorites";
+import useFavoriteEpisodes from "../../../hooks/useFavoriteEpisodes";
+import EpisodesList from "../../../components/EpisodesList";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
@@ -24,6 +26,8 @@ export async function getServerSideProps(context: NextPageContext) {
 
 export default function Home() {
   const { data: favorites = [] } = useFavorites();
+  const { data: favoriteEpsiodes = [] } = useFavoriteEpisodes();
+
 
   return (
     <>
@@ -33,7 +37,8 @@ export default function Home() {
           My Favorites :{" "}
         </div>
         <div className='pb-40'>
-          <MovieList data={favorites} title='Favorites' />
+          <MovieList data={favorites} title='Favorite Movies' />
+          <EpisodesList  data={favoriteEpsiodes} title='Favorite Episodes' />
         </div>
       </SessionProvider>
     </>

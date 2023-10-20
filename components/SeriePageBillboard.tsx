@@ -21,6 +21,9 @@ const SeriePageBillboard = (props: { serieId: string }) => {
         <p className='text-white text-[8px] md:text-lg mt-3 md:mt-8 w-[90%] md:w-[80%] lg:w-[50%] drop-shadow-xl'>
           {data?.description}
         </p>
+        <p className='text-white text-1xl md:text-5xl h-full w-[50%] lg:text-6xl font-bold drop-shadow-xl'>
+          {data?.genre}
+        </p>
       </div>
     </div>
   );

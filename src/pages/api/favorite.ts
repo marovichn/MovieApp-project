@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   try {
     if (req.method === "POST") {
-      const { currentUser } = await serverAuth(req,res);
+      const { currentUser } = await serverAuth(req, res);
 
       const { movieId } = req.body;
 
@@ -21,7 +21,26 @@ export default async function handler(
       });
 
       if (!existingMovie) {
-        throw new Error("Invalid ID");
+        const existingEpisode = await prismadb.video.findUnique({
+          where: {
+            id: movieId,
+          },
+        });
+        if (!existingEpisode) {
+          throw new Error("Invalid ID");
+        }
+        const user = await prismadb.user.update({
+          where: {
+            email: currentUser.email || "",
+          },
+          data: {
+            favoriteIds: {
+              push: movieId,
+            },
+          },
+        });
+
+        return res.status(200).json(user);
       }
 
       const user = await prismadb.user.update({

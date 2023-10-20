@@ -77,7 +77,6 @@ const router = useRouter();
             >
               <BsFillPlayFill size={30} className='ml-0.5' />
             </div>
-            <FavoriteButton movieId={data?.id} />
           </div>
 
           <p className='text-green-400 font-semibold mt-4'>
